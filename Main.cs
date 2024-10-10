@@ -1,6 +1,11 @@
+using NLog;
+
 class Program
 {
     static string csvFilePath = "mario.csv";
+
+    private static Logger logger = LogManager.GetCurrentClassLogger();
+
 
     static void Main()
     {
@@ -62,6 +67,8 @@ class Program
     {
         try
         {
+            logger.Info("Adding a new character.");
+
             Console.WriteLine("Enter character details:");
 
             Console.Write("ID: ");
@@ -87,9 +94,11 @@ class Program
             System.IO.File.AppendAllText(csvFilePath, newCharacter + System.Environment.NewLine);
 
             Console.WriteLine("Character added successfully!");
+            logger.Info("Added new character succcessfully");
         }
         catch
         {
+            logger.Error("Error while adding a character.");
             Console.WriteLine("An error occurred while adding the character.");
         }
     }
